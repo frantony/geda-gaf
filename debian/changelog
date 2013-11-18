@@ -1,3 +1,9 @@
+geda-gaf (1:1.9.0-1) unstable; urgency=low
+
+  * try
+
+ -- Antony Pavlov <antonynpavlov@gmail.com>  Sun, 17 Nov 2013 21:40:38 +0400
+
 geda-gaf (1:1.8.2-2) unstable; urgency=low
 
   * don't run the test suite on armel|armhf, as it seems to cause a make

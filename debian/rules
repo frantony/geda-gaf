@@ -21,7 +21,7 @@ override_dh_auto_test:
 ifneq (${DEB_BUILD_ARCH},armel)
   ifneq (${DEB_BUILD_ARCH},armhf)
 	mkdir -p $(TEST_HOME)
-	HOME=$(TEST_HOME) dh_auto_test
+	#HOME=$(TEST_HOME) dh_auto_test
   endif
 endif
 
@@ -31,6 +31,7 @@ COMMONPKG=libgeda-common
 
 override_dh_auto_install:
 	dh_auto_install --sourcedirectory=libgeda    -- DESTDIR=$(CURDIR)/debian/tmp
+	dh_auto_install --sourcedirectory=libgedacairo -- DESTDIR=$(CURDIR)/debian/tmp
 	dh_auto_install --sourcedirectory=gschem     -- DESTDIR=$(CURDIR)/debian/geda-gschem
 	dh_auto_install --sourcedirectory=gattrib    -- DESTDIR=$(CURDIR)/debian/geda-gattrib
 	dh_auto_install --sourcedirectory=gnetlist   -- DESTDIR=$(CURDIR)/debian/geda-gnetlist
@@ -39,13 +40,15 @@ override_dh_auto_install:
 	dh_auto_install --sourcedirectory=symbols    -- DESTDIR=$(CURDIR)/debian/geda-symbols
 	dh_auto_install --sourcedirectory=docs       -- DESTDIR=$(CURDIR)/debian/geda-doc
 	dh_auto_install --sourcedirectory=examples   -- DESTDIR=$(CURDIR)/debian/geda-examples
+	dh_auto_install --sourcedirectory=gaf        -- DESTDIR=$(CURDIR)/debian/geda-gaf
 
 override_dh_installdocs:
 	dh_installdocs -N$(COMMONPKG) -N$(DEVPKG) -Ngeda -Ngeda-doc
 	dh_installdocs -pgeda -pgeda-doc --link-doc=geda-doc
 	dh_installdocs -p$(COMMONPKG) -p$(DEVPKG) --link-doc=$(COMMONPKG)
 	# Work around install location in some geda- packages:
-	for p in geda-gnetlist geda-gschem geda-gsymcheck geda-utils geda-symbols geda-doc geda-gattrib; do \
+	for p in geda-gnetlist geda-gschem geda-gsymcheck geda-utils \
+	         geda-symbols geda-doc geda-gattrib geda-gaf; do \
 	  rm -rf debian/$$p/usr/share/doc/geda-gaf/man ; \
 	  [ ! -d debian/$$p/usr/share/doc/$$p ] || ( \
 	    mv debian/$$p/usr/share/doc/geda-gaf/*  \
@@ -67,6 +70,8 @@ override_dh_installchangelogs:
 	dh_installchangelogs gnetlist/ChangeLog  -p geda-gnetlist
 	dh_installchangelogs gsymcheck/ChangeLog -p geda-gsymcheck
 	dh_installchangelogs utils/ChangeLog     -p geda-utils
+	# no ChangeLog just now
+	#dh_installchangelogs gaf/ChangeLog     -p geda-gaf
 
 override_dh_installexamples:
 	dh_installexamples -XMakefile -X.in

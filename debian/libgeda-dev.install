@@ -1,3 +1,4 @@
 usr/include
 usr/lib/*/libgeda.so
+usr/lib/*/libgedacairo.so
 usr/lib/*/pkgconfig
