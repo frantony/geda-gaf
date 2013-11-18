@@ -1,0 +1,280 @@
+geda-gaf (1:1.8.2-2) unstable; urgency=low
+
+  * don't run the test suite on armel|armhf, as it seems to cause a make
+    recursion explosion on those architectures for some reason.
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 17 Oct 2013 17:14:18 -0600
+
+geda-gaf (1:1.8.2-1) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * new upstream version
+  * update control file to match overrides for libgeda section
+
+  [ أحمد المحمودي (Ahmed El-Mahmoudy) ]
+  * use guile 1.8 for ia64 & hurd-i386, closes: #716727  
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 26 Sep 2013 13:30:06 -0600
+
+geda-gaf (1:1.8.1-3) unstable; urgency=low
+
+  * debian/control:
+    + Drop libgd2-xpm-dev from (Build-)Deps
+    + Update (Build-)Depends from libgd2-dev to libgd-dev
+  * debian/rules: Install changelogs to libgedaNN
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Tue, 04 Jun 2013 09:42:40 +0200
+
+geda-gaf (1:1.8.1-2) unstable; urgency=low
+
+  * Manually replace directory with symlink in geda.postinst (Closes: #694015)
+    Thanks: gregor herrmann <gregoa@debian.org>
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Sun, 20 Jan 2013 22:49:12 +0200
+
+geda-gaf (1:1.8.1-1) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * new upstream version
+  * Add myself to Uploaders.
+
+  [ أحمد المحمودي (Ahmed El-Mahmoudy) ]
+  * debian/control:
+    + Bumped Standards-Version to 3.9.4
+    + Use canonical URIs in VCS-* fields.
+    + Dropped obsolete DMUA field.
+  * debian/copyright: Update copyright format & years.
+  * Use autotools_dev to update outdated autotools helper files.
+  * Renamed libgeda41 to libgeda42
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 15 Jan 2013 20:56:30 -0700
+
+geda-gaf (1:1.8.0-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #169746, #323981, #499711, #693246,
+    LP: #876299)
+  * Updated watch file
+  * debian/control:
+    + Bumped B-D on libgtk2.0-dev to (>= 2.16.0)
+    + Bumped Guile to 2.0 in Build-Dep & libgeda-dev Depends
+    + Moved mawk dependency from geda-gnetlist to geda-utils, since sw2asc
+      moved there.
+    + Bumped dependencies to:
+      geda-symbols (>= 1:1.7.1), geda-symbols (<< 1:1.9.0~)
+    + set "Depends: geda-doc" from Recommends since its documents (including
+      copyright file) is linked to geda-doc. It fixes "geda: copyright file
+      missing after upgrade (policy 12.5) " (Closes: #694015)
+      Thanks: Hideki Yamane <henrich@debian.or.jp>
+  * Updated debian/*.docs files
+  * Removed debian/geda-examples.docs
+  * Removed all patches, they got applied upstream.
+  * debian/rules:
+    + Removed line renaming gsymfix, it is renamed upstream
+    + Remove override for dh_install, build system behaves sanely.
+    + Add geda-gattrib to list of packages for which to remove
+      /usr/share/doc/geda-gaf/man/
+  * Removed debian/*.manpages, upstream build system already installs manpages
+  * Renamed libgeda38 to libgeda41
+  * Updated symbols file.
+  * Add manpages.diff patch for various manpage fixes.
+  * Remove useless debian/README.debian
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Sun, 25 Nov 2012 16:48:10 +0200
+
+geda-gaf (1:1.6.2-4) unstable; urgency=low
+
+  * Added glib-single-include.patch: Do not include individual glib headers
+    (Closes: #665528)
+  * debian/control:
+    + Bumped Standards-Version to 3.9.3
+    + Bumped Build-Dep on debhelper to >= 9
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Tue, 02 Oct 2012 13:07:10 +0200
+
+geda-gaf (1:1.6.2-3) unstable; urgency=low
+
+  * Move recommends for extra-xdg-menus to geda-gschem & geda-gattrib
+    (Closes: #622329)
+  * Added gawk to geda-utils Depends field.
+    Thanks to Adrian Bunk <bunk@stusta.de> (Closes: #647177)
+  * Updated copyright format.
+    Thanks to Daniel T Chen <seven.steps@gmail.com>
+  * debian/control:
+    + Bumped Standards-Version to 3.9.2
+    + Build-Depend on ghostscript, not gs-common. (Closes: #649704)
+    + Replace libgeda-common in libgeda-dev dependencies with libgeda38
+    + Multiarch support:
+      - Mark libgeda38 as Multi-Arch: same
+      - Mark libgeda-common as Multi-Arch: foreign
+      - Add Pre-Depends: ${misc:Pre-Depends} for libgeda38
+  * Bumped compat level to 9
+    + debian/libgeda38.install, debian/libgeda-dev.install: Install libraries
+      from multiarch paths
+  * Added format-security.diff patch to fix possible format security problems
+    when displaying 'message' string
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Thu, 24 Nov 2011 19:50:49 +0200
+
+geda-gaf (1:1.6.2-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/libgeda-dev.install: Do not install .la file (Closes: #620729)
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Thu, 07 Apr 2011 05:52:40 +0200
+
+geda-gaf (1:1.6.2-1) experimental; urgency=low
+
+  * New upstream release.
+  * Upload to experimental to avoid poisoning freeze exception for 1.6.1-5
+  * debian/watch: Updated watch file.
+  * Removed sch2eaglepos_bashism.diff and fix_string_exceptions.diff patches,
+    as they got applied upstream.
+  * debian/libgeda38.symbols: Added new symbols
+  * debian/control:
+    + Bumped Standards-Version to 3.9.1
+    + Use Breaks instead of Conflicts for geda-symbols (<< 1:1.2.0) and
+      geda (<= 19990516-1)
+  * debian/copyright: Updated copyright years
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Wed, 26 Jan 2011 07:51:03 +0200
+
+geda-gaf (1:1.6.1-5) unstable; urgency=low
+
+  * Added disable_gnetlist-arg.diff patch, to fix arbitrary code execution.
+    (LP: #700194)
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Mon, 24 Jan 2011 19:58:01 +0200
+
+geda-gaf (1:1.6.1-4) unstable; urgency=low
+
+  * Added fix_string_exceptions.diff patch to fix string exceptions in
+    utils/scripts/garchive.py (Closes: #585213)
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Thu, 10 Jun 2010 09:32:47 +0300
+
+geda-gaf (1:1.6.1-3) unstable; urgency=low
+
+  * debian/patches/sch2eaglepos_bashism.diff: Fix another overlooked bashism
+    (Thanks to Dan McMahill from upstream)
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Thu, 13 May 2010 05:46:09 +0300
+
+geda-gaf (1:1.6.1-2) unstable; urgency=low
+
+  * debian/control:
+    + Updated my email address
+    + Added DMUA after sponsors consent
+    (http://lists.alioth.debian.org/pipermail/pkg-electronics-devel/2010-April/001827.html)
+  * geda-gnetlist: added patch sch2eaglepos_bashism.diff to fix bashisms
+    in sch2eaglepos.sh (Closes: #581098).
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>  Wed, 12 May 2010 09:17:11 +0300
+
+geda-gaf (1:1.6.1-1) unstable; urgency=low
+
+  * New upstream release (Closes: #567585)
+  * Imported Upstream version 1.6.1
+  * Removed patch manpages.diff, as it got applied upstream.
+  * Refreshed desktop.diff patch.
+  * debian/control:
+    * Removed duplicate Build-Dep on libxml-parser-perl.
+    * Bumped Standards-Version to 3.8.4
+  * Add patch manpage_typos.diff to fix a couple of typos in gschem
+    manpage.
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@users.sourceforge.net>  Mon, 15 Feb 2010 16:22:23 +0200
+
+geda-gaf (1:1.6.0-4) unstable; urgency=low
+
+  * Fix incorrect guile dependency on ia64 in order to fix FTBFS on
+      that platform. gEDA 1.6.x requires guile 1.8. (Closes: #563933)
+
+ -- Peter Clifton <pcjc2@cam.ac.uk>  Wed, 06 Jan 2010 13:09:58 +0000
+
+geda-gaf (1:1.6.0-3) unstable; urgency=low
+
+  * debian/rules:
+    + Use $(CURDIR) instead of $(PWD)
+    + Remove override for dh_auto_build
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@users.sourceforge.net>  Tue, 22 Dec 2009 07:01:51 +0200
+
+geda-gaf (1:1.6.0-2) unstable; urgency=low
+
+  * Set $HOME to temporary directory in the build tree while running the test
+    suites in order to fix FTBFS on autobuilders (Closes: #561906)
+
+ -- Hamish Moffatt <hamish@debian.org>  Tue, 22 Dec 2009 09:22:08 +1100
+
+geda-gaf (1:1.6.0-1) unstable; urgency=low
+
+  [ Peter Clifton ]
+  * gEDA 1.6.0 upstream release (Closes: #552152)
+    + Country part in translation only when needed (Closes: #336795, #336796)
+    + Remove GtkItemEntry code. Use plain GtkEntry instead. (Closes: #549735)
+    + gschem2pcb deprecated in favor of gsch2pcb which gives more meaningful
+      error messages. (Closes: #126293)
+
+  [ أحمد المحمودي (Ahmed El-Mahmoudy) ]
+  * Switch to source format 3.0 (quilt).
+  * Bumped compat level to 7
+  * debian/control:
+    + Bumped Standards-Version to 3.8.3
+    + Added ${shlib:Depends} to libgeda-dev Depends.
+    + Depend on mawk instead of gawk in geda-gnetlist
+    + Put geda-doc in Section: doc
+    + Fix typo in geda description.
+    + Add ${misc:Depends} to Depends of all packages.
+    + Build-Depend on debhelper >= 7.4.7~
+    + Set Debian Electronics Team as Maintainer.
+    + Add myself and Hamish Mofatt to Uploaders.
+    + Add Vcs-* fields.
+    + Remove usr/share/doc/man/*.html from packages as they already exist as
+      manpages.
+    + Remove libgeda35 from libgeda-dev Depends.
+    + For geda-symbols, move nc.pdf to examples dir.
+    + Demote geda-doc to Recommends. (Closes: #507363)
+    + Add geda-symbols (<< 1:1.7.0~) to Depends for packages depending on
+      geda-symbols. (Closes: #471133)
+    + Enhanced packages' description (Closes: #479615). Credits go to Peter
+      Clifton for the suggestion.
+    + Removed libgeda33 from Conflicts of geda-symbols, as this was
+      never needed.
+    + Added libgeda33 to Conflicts of libgeda-common, since the locales are
+      now installed in libgeda-common.
+  * debian/rules:
+    + Simplify rules file
+    + Add -Wl,--as-needed to LDFLAGS.
+    + Remove macros since they are no longer needed.
+    + Do not override CFLAGS in build.
+    + Do not install util/ChangeLog.* in geda-utils
+    + Link documentation of geda to geda-doc
+    + override dh_clean to avoid removing gnetlist/tests/gnetlistrc.orig
+    + Exclude Makefile* and *.in when installing examples.
+  * Added debian/*.examples, debian/*.manpages, debian/watch,
+    debian/libgeda*.install, debian/geda-doc.docs, debian/libgeda38.symbols,
+    debian/geda-doc.doc-base, debian/libgeda-common.README.Debian
+  * Added debian/geda-gschem.menu (Closes: #447614)
+  * Removed debian/*.dirs, debian/geda-gschem.postinst,
+    debian/libgeda38.postinst
+  * debian/copyright: proper copyright file.
+  * debian/geda-symbols.postrm: Set -e flag
+  * Added patch manpages.diff to remove undefined `l' macro and escape "-".
+  * Added patch desktop.diff to remove Encoding field.
+
+ -- أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@users.sourceforge.net>  Fri, 04 Dec 2009 06:50:27 +0200
+
+geda-gaf (1:1.5.4-0~pcjc2.1) jaunty; urgency=low
+
+  * gEDA 1.5.4 upstream release
+  * Initial attempt at unified debian package. (Closes: #549051)
+  * Based on geda-* Debian packages by Hamish Moffatt.
+  * Fix dependancy of >= $UPSTREAM_VERSION to match the exact debian
+    version of libgeda which was built with this source package.
+  * Added conflict between geda-symbols and the old libgeda33 package,
+    since the new symbols rely on file-format changes not present in
+    that version.
+  * Remove buggy workaround for gxyrs install location (fixed upstream)
+  * Remove resetting of executable bit on some examples (fixed upstream)
+
+ -- Peter Clifton <pcjc2@cam.ac.uk>  Mon, 31 Aug 2009 13:47:00 +0100
